@@ -1,0 +1,118 @@
+const BASE_URL = "http://localhost:3000"
+const TRAINERS_URL = `${BASE_URL}/trainers`
+const POKEMONS_URL = `${BASE_URL}/pokemons`
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// provided solution user story 1
+
+// const trainersContainer = document.querySelector('main');
+
+// fetch(TRAINERS_URL)
+// .then(resp => resp.json())
+// .then(trainers => {
+//   trainers.forEach(trainer => {
+//     const trainerHTML = `
+//     <div class="card" data-id=${trainer.id}><p>${trainer.name}</p>
+//       <button data-action="add" data-trainer-id=${trainer.id}>Add Pokemon</button>
+//       <ul data-trainer-ul-id=${trainer.id}>
+//       </ul>
+//     </div>`;
+
+//     trainersContainer.insertAdjacentHTML('beforeend', trainerHTML);
+//     const trainerUl = document.querySelector(`[data-trainer-ul-id='${trainer.id}']`);
+//     trainer.pokemons.forEach(pokemon => {
+//       const pokeHTML = `
+//       <li>${pokemon.nickname} (${pokemon.species}) 
+//         <button class="release" data-pokemon-id=${pokemon.id}>
+//           Release
+//         </button>
+//       </li>`;
+
+//       trainerUl.insertAdjacentHTML('beforeend', pokeHTML);
+//     })
+//   })
+// }); 
+
+
+
+
+//  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// my wip
+// user story 1
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetchTrainers();
+  // fetchPokemons();
+});
+
+const trainerCard = document.getElementById('container');
+
+function fetchTrainers () {
+  fetch(TRAINERS_URL)
+    .then(resp => resp.json())
+    .then(jdata => {
+      console.log(jdata);
+      renderTrainerCards(jdata);
+    });
+};
+
+// let pokemonList = [];
+// forEach trainer to build card
+// forEach pokemon per trainer to put into card that was built
+function renderTrainerCards(trainers) {
+  // const main = document.getElementById('container');
+  // const ul = document.createElement('ul');
+
+  let pokeList = document.createElement('li');
+  // console.log('Hi')
+  // trainers.pokemons.forEach(pokemon => {
+  //   pokemon.innerHTML += `
+  //     ${pokemon.nickmane} (${pokemon.species}) <button class="release" data-pokemon-id=${pokemon.id}>Release</button>`
+  //   })
+
+
+  trainers.forEach(trainer => {
+    trainerCard.innerHTML += `
+    <div class="card" data-id=${trainer.id}><p>${trainer.name}</p>
+    <button data-trainer-id=${trainer.id}>Add Pokemon</button>
+    <ul data-trainer-ul-id=${trainer.id}>
+      pokemon list goes here
+      <!-- ${pokeList.innerHTML} -->
+    </ul>
+    </div>`;
+  })
+};
+
+  // function renderPokemonToCards() {
+  //   const pokeList = document.createElement('li');
+  //   trainer.pokemons.forEach(pokemon => {
+  //     pokeList.innerHTML += `
+  //     ${pokemon.nickmane} (${pokemon.species}) <button class="release" data-pokemon-id=${pokemon.id}>Release</button>`
+  //   })
+  // };
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~
+// function renderTrainerCards(trainers){
+//   const main = document.getElementById("container");  
+//   console.log(main)
+//   trainers.forEach(trainer => {
+//     let fill = document.createElement("ul")
+//     trainer.pokemons.forEach(pokemon => {
+//       fill.innerHTML += `
+//         <li>${pokemon.nickname} (${pokemon.species})<button data-action="release" datapokemon-id=${pokemon.id}>Realease Pokemon</button></li>`;
+//     })
+//     main.innerHTML += 
+//       // `<div class="card" data-id=${trainer.id}><p>${trainer.name}</p>
+//       //   <button data-trainer-id=${trainer.id}>Add Pokemon</button>
+//       //     ${fill.innerHTML}
+//       // </div>`
+//       `<div class="card" data-id=${trainer.id}><p>${trainer.name}</p>
+//         <button data-action="add" data-trainer-id=${trainer.id}>Add Pokemon</button>
+//         <ul data-trainer-ul-id=${trainer.id}>
+//           ${fill.innerHTML}
+//         </ul>
+//       </div>`
+//   })};
+
+  // <li>Jacey (Kakuna) <button class="release" data-pokemon-id="140">Release</button></li>
